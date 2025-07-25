@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center text-primary mb-4">About Us</h1>
+    <p class="lead text-center mb-5">This project was developed by a team of two dedicated students.</p>
+
+    <div class="row justify-content-start" style="margin-left: 300px;">  <!-- Moved left -->
+        <!-- Maryam's Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg border-0 text-center h-100">
+                <div class="card-body">
+                    <img src="{{ url_for('static', filename='images/images.png') }}" class="rounded-circle mb-3" width="100" alt="Maryam Azmat">
+                    <h5 class="card-title">Maryam Azmat</h5>
+                    <p class="card-text">
+                        <strong>Email:</strong> <a href="mailto:maryamazmat33@gmail.com">maryamazmat33@gmail.com</a><br>
+                        <strong>Roll No:</strong> BSIT51F21S040
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Iram's Card -->
+        <div class="col-md-4 mb-4">
+            <div class="card shadow-lg border-0 text-center h-100">
+                <div class="card-body">
+                    <img src="{{ url_for('static', filename='images/1.jpg') }}" class="rounded-circle mb-3" width="100" alt="Iram Shehzadi">
+                    <h5 class="card-title">Iram Shehzadi</h5>
+                    <p class="card-text">
+                        <strong>Email:</strong> <a href="mailto:iramahmad461@gmail.com">iramahmad461@gmail.com</a><br>
+                        <strong>Roll No:</strong> BSIT51F21S031
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

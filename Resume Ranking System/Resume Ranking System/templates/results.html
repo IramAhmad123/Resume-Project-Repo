@@ -1,0 +1,59 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="display-4">Ranking Results</h1>
+    <h3>Job Description:</h3>
+    <p>{{ job_desc[:500] }}...</p>
+
+    {% if results %}
+    <h3>Top Resumes:</h3>
+    <ul class="list-group">
+        {% for result in results %}
+        <li class="list-group-item">
+            <strong>{{ result.filename }}</strong>
+            <br>
+            Similarity Score: <span id="score-{{ loop.index }}">{{ (result.score * 100) | round(2) }}%</span>
+            <canvas id="chart-{{ loop.index }}" width="100" height="100"></canvas>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="text-warning">No valid resumes were uploaded.</p>
+    {% endif %}
+
+    <a href="{{ url_for('rank_resumes') }}" class="btn btn-secondary">← Back to Upload</a>
+</div>
+
+<!-- Chart.js Library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        {% for result in results %}
+        var ctx = document.getElementById("chart-{{ loop.index }}").getContext("2d");
+        var score = {{ (result.score * 100) | round(2) }};
+
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: [score, 100 - score],
+                    backgroundColor: ['#4CAF50', '#ddd'],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: false,
+                cutout: '70%',
+                plugins: {
+                    legend: { display: false },
+                    tooltip: { enabled: false }
+                }
+            }
+        });
+        {% endfor %}
+    });
+</script>
+{% endblock %}

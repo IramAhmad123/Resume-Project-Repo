@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1 class="display-4 text-primary">Rank Resumes</h1>
+    <p class="lead">Upload a job description and resumes to rank them based on relevance.</p>
+
+    <form method="post" action="{{ url_for('rank_resumes') }}" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="job_desc">Job Description:</label>
+            <textarea class="form-control" id="job_desc" name="job_desc" rows="5" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="resumes">Upload Resumes (PDF only):</label>
+            <input type="file" class="form-control-file" id="resumes" name="resumes" multiple accept="application/pdf" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Rank Resumes</button>
+    </form>
+</div>
+{% endblock %}
